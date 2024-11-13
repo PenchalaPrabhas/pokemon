@@ -1,0 +1,145 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 24px;
+  color: #333;
+}
+
+.home-button {
+  padding: 8px 12px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.home-button:hover {
+  background-color: #0056b3;
+}
+
+.game-container {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  max-width: 800px;
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+}
+
+.image-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  max-width: 300px; /* Set a fixed max width for the image container */
+}
+
+.image-container img {
+  width: 100%;
+  height: auto; /* Maintain aspect ratio */
+  object-fit: contain; /* Prevent cropping */
+}
+
+.options-container {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 500px; /* Limit the width of options container */
+}
+
+.score-timer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.options button {
+  padding: 10px;
+  background-color: #eee;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.options button:hover {
+  background-color: #ddd;
+}
+
+.options button.correct {
+  background-color: #28a745;
+  color: white;
+}
+
+.options button.wrong {
+  background-color: #dc3545;
+  color: white;
+}
+
+#nextButton {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#nextButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+@media screen and (max-width: 600px) {
+  .game-container {
+    flex-direction: column; /* Stack image and options on small screens */
+    align-items: center;
+  }
+
+  .image-container {
+    width: 50%;
+    max-width: 50%; /* Allow image container to take full width */
+  }
+
+  .image-container img {
+    width: 80%; /* Make the image bigger within the container */
+  }
+
+  .options-container {
+    width: 100%; /* Take full width on small screens */
+  }
+
+  .options button {
+    width: 100%; /* Make buttons fill available width on small screens */
+  }
+}

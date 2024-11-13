@@ -1,0 +1,208 @@
+/* General Body Style */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+  }
+  
+  /* Header Styling */
+  header {
+    background-color: #191b19;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  header select{
+    padding: 8px 12px;
+    margin-left: 10px;
+    font-size: 16px;
+    background: #ffffff; /* Yellow-gold to coral-red gradient */
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 2px;;
+   
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  header button {
+    padding: 8px 12px;
+    margin-left: 10px;
+    font-size: 16px;
+    background: linear-gradient(135deg, #f9d423, #ffffff); /* Yellow-gold to coral-red gradient */
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  header button:hover,
+  header select:hover {
+    background: linear-gradient(135deg, #ff4e50, #f9d423); /* Reverse gradient on hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+  }
+  
+  /* Distinct color for input */
+  header input {
+    padding: 8px 12px;
+    margin-left: 10px;
+    font-size: 16px;
+    background-color: #b2dfdb; /* Soft teal color */
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  header input:hover {
+    background-color: #80cbc4; /* Slightly darker teal on hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Focus effect for all elements */
+  header select:focus,
+  header input:focus,
+  header button:focus {
+    outline: 2px solid #ff6b6b; /* Light coral outline for focus */
+    outline-offset: 2px;
+  }
+  
+  
+  /* Main container styling */
+  .main-container {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  /* Styling for the results container */
+  .results-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* Display 6 columns */
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 20px;
+  }
+  
+  /* Styling for each Pokémon result container */
+  .result {
+    background-color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+    border-color: chartreuse 5px;
+    outline: 2px solid #959393;
+  }
+  
+  .result img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .result p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Hover effect for better interactivity */
+  .result:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(107, 14, 14, 0.2);
+    border-color: chartreuse 5px;
+    outline: 2px solid #000000;
+  }
+  
+  /* Adjust the layout on smaller screens */
+  @media (max-width: 1024px) {
+    .results-container {
+      grid-template-columns: repeat(3, 1fr); /* 3 columns on medium screens */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .results-container {
+      grid-template-columns: repeat(2, 1fr); /* 2 columns on smaller screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .results-container {
+      grid-template-columns: 1fr; /* 1 column on very small screens */
+    }
+  }
+/* Style for the popup */
+.popup {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Black w/ opacity */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Popup content */
+.popup-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Adjust size */
+  max-width: 500px;
+}
+
+/* Close button */
+.close {
+  color: #000000;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: rgb(255, 0, 0);
+  text-decoration: none;
+  cursor: pointer;
+}
+ .info{
+  padding: 8px 12px;
+  margin-left: 10px;
+  font-size: 16px;
+  background: linear-gradient(135deg, #06d5ff, #0015ff); /* Yellow-gold to coral-red gradient */
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+.info:hover {
+  background: linear-gradient(135deg, #ffffff, #ffffff); /* Reverse gradient on hover */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  color: black;
+  
+  font-weight: 500;
+  transform: translateY(-2px);
+}

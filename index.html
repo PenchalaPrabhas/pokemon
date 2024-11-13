@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokémon Search</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Pokémon Search</h1>
+    
+    <div>
+      <button onclick="infos()" class="info">i</button>
+      <select id="searchType">
+        <option value="name">Name</option>
+        <option value="ability">Ability</option>
+        <option value="type">Type</option>
+      </select>
+
+      <input type="text" id="searchInput" placeholder="Search Pokémon..." />
+      <button onclick="searchPokemon()">Search</button>
+      <button onclick="fetchRandomPokemon()">Refresh</button>
+      <button onclick="goToGame()" class="game-button">Go to Game</button>
+      <button onclick="contact()">Contact Us</button>
+
+    </div>
+  </header>
+  <!-- Button to open the popup -->
+
+
+<!-- Popup Modal -->
+<div id="infoPopup" class="popup">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup()">&times;</span>
+    <h2>How to Search</h2>
+    <p><strong>Name:</strong> Enter the name of a Pokémon (e.g., Pikachu, Bulbasaur,..) to search for a specific Pokémon.</p>
+    <p><strong>Ability:</strong> Enter the name of an ability (e.g., Rain-dish, Overgrow,...) to search for Pokémon with that ability.</p>
+    <p><strong>Type:</strong> Enter the type of Pokémon (e.g., Water, Fire, Grass,ghost,..) to search for Pokémon of that type.</p>
+  </div>
+</div>
+
+
+  <div class="main-container">
+    <div class="results-container" id="results">
+      <!-- Pokémon results will be displayed here -->
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    function goToGame() {
+      window.location.href = 'game.html'; // Redirects to the game page
+    }
+    function contact() {
+      window.location.href = 'contact.html'; // Redirects to the game page
+    }
+  </script>
+</body>
+</html>

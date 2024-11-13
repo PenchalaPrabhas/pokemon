@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokémon Details</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <button onclick="goHome()" class="home-button">Home</button>
+    <button onclick="goBack()" class="back-button">Go Back</button>
+    
+    <div class="content">
+      <div id="pokemonImage" class="pokemon-image-container"></div>
+      <div class="details-container">
+        <div id="pokemonDetails" class="pokemon-details"></div>
+        <h2 class="evolution-heading">Evolution Details</h2>
+        <div id="evolutionChain" class="evolution-chain"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+
+    function goHome() {
+      window.location.replace("index.html"); // Replace with your actual home page
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const pokemonId = urlParams.get('id');
+
+    async function fetchPokemonDetails() {
+      try {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
+        const pokemon = await response.json();
+        displayPokemonData(pokemon);
+
+        const speciesResponse = await fetch(pokemon.species.url);
+        const speciesData = await speciesResponse.json();
+        const evolutionResponse = await fetch(speciesData.evolution_chain.url);
+        const evolutionData = await evolutionResponse.json();
+        displayEvolutionChain(evolutionData);
+      } catch (error) {
+        console.error('Error fetching Pokémon details:', error);
+        document.getElementById('pokemonDetails').innerHTML = 'Error loading data. Please try again.';
+      }
+    }
+
+    function displayPokemonData(pokemon) {
+      const imageContainer = document.getElementById('pokemonImage');
+      imageContainer.innerHTML = `
+        <img src="${pokemon.sprites.front_default}" alt="${pokemon.name}" class="main-pokemon-image">
+        <img src="${pokemon.sprites.back_default}" alt="${pokemon.name} (back)" class="main-pokemon-image">
+      `;
+
+      const detailsDiv = document.getElementById('pokemonDetails');
+      detailsDiv.innerHTML = `
+        <h1>${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h1>
+        <p><strong>Type(s):</strong> ${pokemon.types.map(type => type.type.name).join(', ')}</p>
+        <p><strong>Ability(ies):</strong> ${pokemon.abilities.map(ability => ability.ability.name).join(', ')}</p>
+        <p><strong>Height:</strong> ${pokemon.height / 10} m</p>
+        <p><strong>Weight:</strong> ${pokemon.weight / 10} kg</p>
+        <p><strong>Stats:</strong> ${pokemon.stats.map(stat => `${stat.stat.name}: ${stat.base_stat}`).join(', ')}</p>
+      `;
+    }
+
+    function displayEvolutionChain(evolutionData) {
+      const evolutionDiv = document.getElementById('evolutionChain');
+      let evolutionHTML = '';
+      let currentStage = evolutionData.chain;
+
+      while (currentStage) {
+        const pokemonName = currentStage.species.name;
+        const speciesUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
+
+        evolutionHTML += `<div class="evolution-stage" data-url="${speciesUrl}" data-name="${pokemonName}">
+                            <p class="evolution-name">${pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1)}</p>
+                            <img src="" alt="${pokemonName}" class="evolution-image" data-pokemon="${pokemonName}">
+                          </div>`;
+
+        currentStage = currentStage.evolves_to[0];
+      }
+      evolutionDiv.innerHTML = evolutionHTML;
+
+      document.querySelectorAll('.evolution-image').forEach(img => {
+        const parentDiv = img.closest('.evolution-stage');
+        fetch(parentDiv.dataset.url)
+          .then(response => response.json())
+          .then(data => {
+            img.src = data.sprites.front_default;
+          })
+          .catch(error => console.error('Error fetching evolution image:', error));
+
+        // Add click event to navigate to Pokémon details on click
+        parentDiv.addEventListener('click', () => {
+          window.location.href = `pokeinfo.html?id=${parentDiv.dataset.name}`;
+        });
+      });
+    }
+
+    fetchPokemonDetails();
+  </script>
+</body>
+</html>
